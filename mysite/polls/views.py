@@ -2,26 +2,30 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.db.models import F
+from django.views import generic
 
 from .models import Question, Choice
 
-def index(request):
 
-	latest_question_list = Question.objects.order_by('-pub_date')[:5]
+class IndexView(generic.ListView):
+	
+	template_name = 'polls/index.html'
+	context_object_name = 'latest_question_list'
 
-	context = {
-		'latest_question_list': latest_question_list,
-	}
+	def get_queryset(self):
 
-	return render(request, 'polls/index.html', context)
+		return Question.objects.order_by('-pub_date')[:5]
 
 
-def detail(request, question_id):
+class DetailView(generic.DetailView):
+	model = Question
+	template_name = 'polls/detail.html'
 
-	question = get_object_or_404(Question, pk=question_id)
 
-	return render(request, 'polls/detail.html', {'question': question})
-
+class ResultsView(generic.DetailView):
+	model = Question
+	template_name = 'polls/results.html'
+			
 
 def vote(request, question_id):
 
@@ -38,10 +42,3 @@ def vote(request, question_id):
 		#poderia usar += 1, porém haveria problemas de concorrência caso dois usuarios tentasse votar ao mesmo tempo, a função F previne esse problema.
 		select_choice.save()
 		return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
-
-
-def results(request, question_id):
-
-	question = get_object_or_404(Question, pk=question_id)
-
-	return render(request, 'polls/results.html', {'question': question})
