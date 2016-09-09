@@ -1,0 +1,40 @@
+01 Instalei o pip: sudo python3 get-pip.py
+
+02 Instalei o Django: sudo pip install Django
+
+03 Criei o projeto: django-admin startproject mysite
+
+04 Criei o app: python3 manage.py startapp app_name
+
+05 Criei uma view
+
+06 Criei o arquivo urls.py dentro do diretorio da app
+
+07 Configurei a view nos arquivos urls.py do projeto e da app
+
+08 Iniciei o sever: python3 manage.py runserver
+
+09 Iniciei a app: python3 manage.py startapp app_name
+
+10 A instalação do psycopg2 (modulo do postgresql):
+	# sudo apt install python3-dev (pacote necessário)
+	# sudo pip install psycopg2
+
+11 A configuração do PostgreSQL é feita no arquivo settings.py no dir da app
+
+12 Após criar os models (ver models.py) é preciso rodar o comando para criar o
+   arquivo de migration:
+	$ python3 manage.py makemigrations app_name
+
+	O arquivo de migration é um script python: app_name/migrations/0001_initial.py
+	Para ver como será a query real:
+	$ python3 manage.py sqlmigrate app_name 0001
+
+	Checar se há problemas com os modelos antes de criar a migration ou executá-la:
+	$ python3 manage.py check
+
+	Realizar a migration:
+	$ python3 manage.py migrate
+
+13 Criação do usuário administrador:
+	$ python3 manage.py createsuperuser

@@ -1,0 +1,19 @@
+$ -> No terminal do linux
+# -> No console do Postgre
+
+1 Logar usuario postgres:
+	$ sudo -i -u postgres
+2 Criar usuario:
+	$ createuser -P nome_do_usuario
+3 Excluír usuario:
+	$ dropuser nome_do_usuario
+4 Acessar prompt:
+	$ psql
+5 Criar base de dados:	
+	# create database nome_da_base
+6 Listar bases de dados:
+	# \list
+7 Trocar base de dados:
+	# \connect base_de_dados
+8 Listar tabelas:
+	# \dt

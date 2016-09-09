@@ -1,0 +1,14 @@
+1 - Aluguém faz uma requisição: "<url_raiz>/polls/34"
+
+2 - O Django carrega o módulo Python mysite.urls que está sendo apontado da definição ROOT_URLCONF no arquivo .../mysite/settings.py
+
+3 - Ele encontra a variável chamada urlpatterns e atravessa as expressões regulares seguindo a ordem
+
+4 - Depois de econtrar a combinação "^polls/" ele corta o texto que combina ("polls/") e repassa a parte posterior "34/" para polls.urls
+
+5 - No polls.urls ele encontra r'^(?P<question_id>[0-9]+)/$' que resulta em uma chamada para view detail()
+	detail(request=<HttpRequest object>, question_id='34')
+
+6 - question_id='34' vem de (?P<question_id>[0-9]+), lembre-se, o que casa com a expressão entre parenteses é enviado como argumento para a função
+	?P<question_id> é o nome da variável e [0-9]+ é a expressão regular para casar com a sequência de dígitos.
+
